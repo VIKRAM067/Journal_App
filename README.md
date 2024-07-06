@@ -54,6 +54,21 @@ A simple journal web application built with Spring Boot. This application allows
 - **Method**: `DELETE`
 - **Response**: A success message.
 
+# Application Configuration
+
+Configure your `application.properties` file with the following settings to connect your Spring Boot application to a MySQL database:
+
+```properties
+spring.application.name=app
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/journal
+spring.datasource.username=<username>
+spring.datasource.password=<password>
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+
+
 ## Project Structure
 
 ```plaintext
@@ -69,6 +84,8 @@ src
 │   │               │   └── Journal.java
 │   │               ├── Services
 │   │               │   └── JournalService.java
+│   │               ├── Repository
+│   │               │   └── JournalDAO.java
 │   └── resources
 │       └── application.properties
 └── test
