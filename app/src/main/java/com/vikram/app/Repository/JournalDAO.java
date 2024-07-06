@@ -12,5 +12,6 @@ import com.vikram.app.Entity.Journal;
 public interface JournalDAO extends JpaRepository< Journal , Long > {
 
     List<Journal> findByDate(Date date);
+    
 
 }
