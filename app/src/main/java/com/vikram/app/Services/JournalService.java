@@ -68,7 +68,7 @@ public class JournalService {
         try {
             Journal newJournal = journalDAO.findById(id)
                         .orElseThrow(() -> new RuntimeException("Journal not found with id: " + id));
-                        
+
             newJournal.setNotes(journal.getNotes());
             journalDAO.save(newJournal);
             return new ResponseEntity<>("success",HttpStatus.OK);
@@ -81,4 +81,17 @@ public class JournalService {
         
        
     }
+
+    public ResponseEntity<String> deleteById(Long id) {
+        try {
+            journalDAO.deleteById(id);
+            return new ResponseEntity<>("success",HttpStatus.OK);
+        } 
+        catch (Exception e) {
+           e.printStackTrace();
+        }
+        return new ResponseEntity<>("Failed",HttpStatus.BAD_REQUEST);
+    }
+
+    
 }

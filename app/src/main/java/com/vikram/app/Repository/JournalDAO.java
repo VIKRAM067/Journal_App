@@ -13,5 +13,4 @@ public interface JournalDAO extends JpaRepository< Journal , Long > {
 
     List<Journal> findByDate(Date date);
     
-
 }
