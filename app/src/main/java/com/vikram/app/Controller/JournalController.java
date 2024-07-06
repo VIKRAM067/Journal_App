@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vikram.app.Entity.Journal;
 import com.vikram.app.Services.JournalService;
 
-import java.time.LocalDate;
+
 import java.util.Date;
 import java.util.List;
 
