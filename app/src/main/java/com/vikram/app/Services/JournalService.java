@@ -1,6 +1,7 @@
 package com.vikram.app.Services;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,17 +51,15 @@ public class JournalService {
 
     }
 
-    public ResponseEntity<List<Journal>> getByDate(java.util.Date utilDate) {
-
-        // Convert java.util.Date to java.sql.Date
+    public ResponseEntity<List<Journal>> getByDate(java.util.Date date) {
         try {
-            Date sqlDate = new Date(utilDate.getTime());
-        return new ResponseEntity<>(journalDAO.findByDate(sqlDate),HttpStatus.OK);
-            
+            Date sqlDate = new java.sql.Date(date.getTime());
+            List<Journal> journals = journalDAO.findByDate(sqlDate);
+            return ResponseEntity.ok(journals);
         } catch (Exception e) {
             e.printStackTrace();
+            return ResponseEntity.badRequest().body(new ArrayList<>());
         }
-        return new ResponseEntity<> (new ArrayList<>() ,HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<String> putByTopic(Long id, Journal journal) {
@@ -92,6 +91,17 @@ public class JournalService {
         }
         return new ResponseEntity<>("Failed",HttpStatus.BAD_REQUEST);
     }
+
+    public ResponseEntity<String> deleteAll() {
+        try {
+            journalDAO.deleteAll();
+            return new ResponseEntity<>("Success",HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return  new ResponseEntity<>("Failed",HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vikram.app.Entity.Journal;
 import com.vikram.app.Services.JournalService;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -41,8 +42,7 @@ public class JournalController {
     } 
 
     @GetMapping("/date/{date}")
-    public ResponseEntity<List<Journal>> getByDate(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date date)
-    {
+    public ResponseEntity<List<Journal>> getByDate(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         return journalService.getByDate(date);
     }
 
@@ -59,7 +59,11 @@ public class JournalController {
         return journalService.deleteById(id);
     }
     
-  
+    @DeleteMapping("/all")
+    public ResponseEntity<String> deleteAll()
+    {
+        return journalService.deleteAll();
+    }
 
     
 }
